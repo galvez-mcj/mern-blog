@@ -1,8 +1,11 @@
+import BlogPreview from "../components/BlogPreview"
 
 const Home = () => {
   return (
-    <div>
-      Home Page
+    <div className="home-page">
+      <BlogPreview />
+      <BlogPreview />
+      <BlogPreview />
     </div>
   )
 }
