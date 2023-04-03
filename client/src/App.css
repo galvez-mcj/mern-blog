@@ -35,7 +35,7 @@ a {
 }
 
 .nav-bar .logo {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--primary);
   font-weight: bold;
 }
@@ -46,6 +46,7 @@ a {
 }
 
 .nav-items a {
+  font-size: 1.1rem;
   color: var(--primary);
 }
 
@@ -97,4 +98,49 @@ a {
   .blog-preview .blog-img {
     max-width: 100%
   }
+}
+
+/* Login and Register Page */
+.login-page, .register-page {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.login-page h2, .register-page h2 {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 8px;
+  color: var(--text-dim);
+  border: 1px solid var(--text-dim);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-page button, .register-page button {
+  margin-top: 8px;
+  width: 100%;
+  padding: 7px;
+  background-color: var(--secondary);
+  border: 1px solid var(--secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.login-text, .register-text {
+  margin-top: 24px;
+}
+
+.login-text a, .register-text a {
+  color: var(--primary);
+}
+
+.login-text a:hover, .register-text a:hover {
+  color: var(--secondary);
 }
