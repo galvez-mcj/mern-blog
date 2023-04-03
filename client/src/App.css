@@ -21,6 +21,7 @@ a {
   text-decoration: none;
 }
 
+/* Navigation Styles */
 .nav-bar {
   max-width: 900px;
   margin: 0 auto;
@@ -50,4 +51,11 @@ a {
 
 .nav-items a:hover {
   color: var(--secondary);
+}
+
+/* Page Styles */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
 }
