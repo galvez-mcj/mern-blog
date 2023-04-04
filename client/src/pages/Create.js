@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Navigate } from "react-router-dom"
 import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css'
 
@@ -23,6 +24,7 @@ const Create = () => {
     const [summary, setSummary] = useState('')
     const [content, setContent] = useState('')
     const [files, setFiles] = useState('')
+    const [redirect, setRedirect] = useState(false)
 
     const handleSubmit = async (e) => {
         const data = new FormData()
@@ -33,10 +35,19 @@ const Create = () => {
 
         e.preventDefault()
 
-        await fetch('http://localhost:5000/post', {
+        const response = await fetch('http://localhost:5000/post', {
             method: 'POST',
             body: data
         })
+
+        if (response.ok) {
+            alert('New blog successfully created.')
+            setRedirect(true)
+        }
+    }
+
+    if (redirect) {
+        return <Navigate to={'/'} />
     }
 
     return (

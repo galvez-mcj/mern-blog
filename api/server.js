@@ -98,6 +98,12 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     res.json(newPost)
 })
 
+// get all blog posts
+app.get('/posts', async (req, res) => {
+    const posts = await Post.find()
+    res.json(posts)
+})
+
 
 // connect to db
 mongoose.connect(process.env.DB_URI)
