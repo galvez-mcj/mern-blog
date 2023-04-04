@@ -23,6 +23,7 @@ app.use(cors({ credentials: true,
             }))
 app.use(express.json())
 app.use(cookieParser())
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // for password hiding
 const salt = bcrpyt.genSaltSync(16)
@@ -106,7 +107,10 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
 
 // get all blog posts
 app.get('/posts', async (req, res) => {
-    const posts = await Post.find().populate('author', ['username'])
+    const posts = await Post.find()
+                    .populate('author', ['username'])
+                    .sort({ createdAt: -1 })
+                    .limit(20)
     res.json(posts)
 })
 

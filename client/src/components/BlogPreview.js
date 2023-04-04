@@ -4,7 +4,7 @@ import { format } from "date-fns"
 const BlogPreview = ({ title, summary, cover, createdAt, author }) => {
   return (
     <div className="blog-preview">
-      <img src={cover} alt="" className="blog-img"/>
+      <img src={`http://localhost:5000/${cover}`} alt="" className="blog-img"/>
       <div className="content">
         <h1>{ title }</h1>
         <div className="info">
