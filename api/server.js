@@ -130,7 +130,7 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
             return res.status(400).json('you are not the author of this post');
         }
         
-        await post.update({
+        await post.updateOne({
             title,
             summary,
             content,
