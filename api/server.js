@@ -10,7 +10,9 @@ const User = require('./models/User')
 
 const app = express()
 
-app.use(cors())
+app.use(cors({ credentials: true,
+                origin: 'http://localhost:3000'
+            }))
 app.use(express.json())
 
 // for password hiding
@@ -43,7 +45,6 @@ app.post('/login', async (req, res) => {
         jwt.sign({ username, id:user._id }, secret, {}, (err, token) => {
             if (err) throw err;
             res.cookie('token', token).json('ok')
-            
         })
     } else {
         res.status(400).json('wrong credentials')
