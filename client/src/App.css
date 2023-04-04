@@ -94,22 +94,39 @@ a {
   font-weight: bold;
 }
 
-
-/* Blog Details */
-.blog-details .blog-img {
-  max-width: 900px;
-}
-
 @media screen and (max-width: 600px) {
   .blog-preview {
     flex-direction: column;
     gap: 10px;
   }
 
-  .blog-preview .blog-img, .blog-details .blog-img {
+  .blog-preview .blog-img{
     max-width: 100%
   }
+}
 
+
+/* Blog Details */
+.blog-details .image {
+  max-height: 300px;
+  display: flex;
+  overflow: hidden;
+  margin: 20px 0px;
+}
+
+.blog-details .image img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.blog-details h1, .author {
+  display: block;
+  text-align: center;
+}
+
+.blog-details .author {
+  color: var(--text-dim);
 }
 
 

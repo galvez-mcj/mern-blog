@@ -19,11 +19,12 @@ const BlogDetails = () => {
 
     return (
         <div className="blog-details">
-            <img src={`http://localhost:5000/${postInfo.cover}`} alt="" className="blog-img" />
             <h1>{ postInfo.title }</h1>
-            <time>{ format(new Date(postInfo.createdAt), 'MMM dd, yyyy HH:mm') }</time>
             <div className="author">
-                by @{postInfo.author.username}
+                by @{postInfo.author.username} | <span><time>{ format(new Date(postInfo.createdAt), 'MMM dd, yyyy HH:mm') }</time></span>
+            </div>
+            <div className="image">
+                <img src={`http://localhost:5000/${postInfo.cover}`} alt=""/>
             </div>
             <div
                 className="content"
