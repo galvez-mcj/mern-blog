@@ -4,6 +4,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const bcrpyt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const User = require('./models/User')
 
@@ -14,10 +15,7 @@ app.use(express.json())
 
 // for password hiding
 const salt = bcrpyt.genSaltSync(16)
-
-/* app.get("/api/users", (req, res) => {
-    res.json('test ok')
-}) */
+const secret = process.env.SECRET
 
 app.post('/register', async (req, res) => {
     const { username, password } = req.body
@@ -33,6 +31,7 @@ app.post('/register', async (req, res) => {
     }
 })
 
+// establish token 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body
 
@@ -41,6 +40,11 @@ app.post('/login', async (req, res) => {
     
     if (passOk) {
         // logged in
+        jwt.sign({ username, id:user._id }, secret, {}, (err, token) => {
+            if (err) throw err;
+            res.cookie('token', token).json('ok')
+            
+        })
     } else {
         res.status(400).json('wrong credentials')
     }
