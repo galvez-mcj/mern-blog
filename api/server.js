@@ -7,7 +7,9 @@ const bcrpyt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 
+// models
 const User = require('./models/User')
+const Post = require('./models/Post')
 
 // for blog data
 const fs = require('fs')
@@ -77,15 +79,23 @@ app.post('/logout', (req, res) => {
 })
 
 // create new blog post
-app.post('/post', uploadMiddleware.single('file'), (req, res) => {
+app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     const { originalname, path } = req.file
     const parts = originalname.split('.')
     const ext = parts[parts.length - 1]
-    fs.renameSync(path, path + '.' + ext)
+    const newPath = path + '.' + ext
+    fs.renameSync(path, newPath)
 
     // save to db
-    
-    res.json({files: req.file})
+    const { title, summary, content } = req.body
+    const newPost = await Post.create({
+        title,
+        summary,
+        content,
+        cover: newPath
+    })
+
+    res.json(newPost)
 })
 
 
