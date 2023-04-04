@@ -129,6 +129,9 @@ a {
   color: var(--text-dim);
 }
 
+.blog-details .content p {
+  line-height: 1.5rem;
+}
 
 /* Login and Register Page */
 .login-page, .register-page {
