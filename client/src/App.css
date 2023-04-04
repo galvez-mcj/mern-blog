@@ -112,7 +112,7 @@ a {
   text-align: center;
 }
 
-input {
+.login-page form input, .register-page form input {
   display: block;
   width: 100%;
   padding: 7px;
@@ -123,7 +123,7 @@ input {
   font-size: 1rem;
 }
 
-.login-page .btn, .register-page .btn {
+.btn {
   margin-top: 8px;
   width: 100%;
   padding: 7px;
@@ -134,7 +134,7 @@ input {
   font-size: 1rem;
 }
 
-.login-page .dis, .register-page .dis {
+.dis {
   background-color: var(--text-dim);
   border: 1px solid var(--text-dim);
   cursor: not-allowed;
@@ -150,6 +150,21 @@ input {
 
 .login-text a:hover, .register-text a:hover {
   color: var(--secondary);
+}
+
+
+/* Create Post Page */
+.create-page h2 {
+  margin-bottom: 16px;
+}
+
+.create-form input {
+  display: block;
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  border: 1px solid #cacaca;
 }
 
 .error-container {
