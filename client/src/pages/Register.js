@@ -7,20 +7,22 @@ const Register = () => {
   const [confPassword, setConfPassword] = useState('')
   const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const user = { username, password }
 
-    fetch('http://localhost:5000/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
-    }).then( () => {
-      console.log('new user registered.')
-    }).catch( err => {
-      setError(err.message)
+    const response = await fetch('http://localhost:5000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
     })
+
+    if (response.status === 200) {
+      alert('Registration Successful!')
+    } else {
+      alert('Registration Failed.')
+    }
   }
 
   return (
@@ -30,12 +32,14 @@ const Register = () => {
         <input 
           type="text"
           placeholder="username"
+          min={4}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
           placeholder="password"
+          min={6}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -53,7 +57,8 @@ const Register = () => {
         }
         <button
           className={(confPassword && password === confPassword)
-                      ? "btn" : "btn dis"}>
+                      ? "btn" : "btn dis"}
+          disabled={(confPassword && password !== confPassword)}>
           Register
         </button>
         { error && 
