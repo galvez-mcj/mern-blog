@@ -33,6 +33,20 @@ app.post('/register', async (req, res) => {
     }
 })
 
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body
+
+    const user = await User.findOne({ username })
+    const passOk = bcrpyt.compareSync(password, user.password)
+    
+    if (passOk) {
+        // logged in
+    } else {
+        res.status(400).json('wrong credentials')
+    }
+    
+})
+
 // connect to db
 mongoose.connect(process.env.DB_URI)
     .then(() => {
