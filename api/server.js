@@ -86,21 +86,27 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     const newPath = path + '.' + ext
     fs.renameSync(path, newPath)
 
-    // save to db
-    const { title, summary, content } = req.body
-    const newPost = await Post.create({
-        title,
-        summary,
-        content,
-        cover: newPath
-    })
+    // get token to attach post to specific user
+    const { token } = req.cookies
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
 
-    res.json(newPost)
+        // save to db
+        const { title, summary, content } = req.body
+        const newPost = await Post.create({
+            title,
+            summary,
+            content,
+            cover: newPath,
+            author: info.id
+        })
+        res.json(newPost)
+    })
 })
 
 // get all blog posts
 app.get('/posts', async (req, res) => {
-    const posts = await Post.find()
+    const posts = await Post.find().populate('author', ['username'])
     res.json(posts)
 })
 
