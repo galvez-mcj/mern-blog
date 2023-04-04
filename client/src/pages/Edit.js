@@ -1,37 +1,51 @@
-import { useState } from "react"
-import { Navigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Navigate, useParams } from "react-router-dom"
 import ContentEditor from "../components/ContentEditor"
 
-const Create = () => {
+const Edit = () => {
+    const { id } = useParams()
     const [title, setTitle] = useState('')
     const [summary, setSummary] = useState('')
     const [content, setContent] = useState('')
     const [files, setFiles] = useState('')
     const [redirect, setRedirect] = useState(false)
+    
+    useEffect( () => {
+        fetch(`http://localhost:5000/post/${id}`)
+            .then( response => {
+                response.json().then( postInfo => {
+                    setTitle(postInfo.title)
+                    setSummary(postInfo.summary)
+                    setContent(postInfo.content)
+                })
+            })
+    }, [])
 
     const handleSubmit = async (e) => {
+        e.preventDefault()
+
         const data = new FormData()
         data.set('title', title)
         data.set('summary', summary)
         data.set('content', content)
-        data.set('file', files[0])
+        data.set('id', id)
+        if (files?.[0]) {
+            data.set('file', files?.[0])
+        }
 
-        e.preventDefault()
-
-        const response = await fetch('http://localhost:5000/post', {
-            method: 'POST',
+        const response = await fetch('http://localhost:5000/post/', {
+            method: 'PUT',
             body: data,
             credentials: 'include'
         })
 
         if (response.ok) {
-            alert('New blog successfully created.')
             setRedirect(true)
         }
     }
 
     if (redirect) {
-        return <Navigate to={'/'} />
+        return <Navigate to={`/post/${id}`} />
     }
 
     return (
@@ -57,10 +71,10 @@ const Create = () => {
             <ContentEditor 
                 value={content}
                 onChange={setContent}/>
-            <button className="btn">Create Post</button>
+            <button className="btn">Update Post</button>
         </form>
         </div>
     )
 }
 
-export default Create
+export default Edit

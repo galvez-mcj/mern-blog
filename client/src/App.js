@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Create from './pages/Create';
 import BlogDetails from './pages/BlogDetails';
+import Edit from './pages/Edit';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/create" element={<Create />} />
           <Route path="/post/:id" element={<BlogDetails />} />
+          <Route path="/edit/:id" element={<Edit />} />
         </Route>
       </Routes>
     </UserContextProvider>
