@@ -9,6 +9,11 @@ const cookieParser = require('cookie-parser')
 
 const User = require('./models/User')
 
+// for blog data
+const fs = require('fs')
+const multer = require('multer')
+const uploadMiddleware = multer({ dest: 'uploads/' })
+
 const app = express()
 
 app.use(cors({ credentials: true,
@@ -69,6 +74,18 @@ app.get('/profile', (req, res) => {
 // logout
 app.post('/logout', (req, res) => {
     res.cookie('token', '').json('ok')
+})
+
+// create new blog post
+app.post('/post', uploadMiddleware.single('file'), (req, res) => {
+    const { originalname, path } = req.file
+    const parts = originalname.split('.')
+    const ext = parts[parts.length - 1]
+    fs.renameSync(path, path + '.' + ext)
+
+    // save to db
+    
+    res.json({files: req.file})
 })
 
 
