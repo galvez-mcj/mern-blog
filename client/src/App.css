@@ -49,6 +49,7 @@ a {
 .nav-items a {
   font-size: 1.1rem;
   color: var(--primary);
+  cursor: pointer;
 }
 
 .nav-items a:hover {
