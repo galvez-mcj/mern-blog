@@ -78,6 +78,10 @@ a {
   max-width: 600px;
 }
 
+.blog-preview .content a h1 {
+  color: var(--text-color);
+}
+
 .blog-preview .content .info {
   margin-top: 8px;
   margin-bottom: 16px;
@@ -90,16 +94,24 @@ a {
   font-weight: bold;
 }
 
+
+/* Blog Details */
+.blog-details .blog-img {
+  max-width: 900px;
+}
+
 @media screen and (max-width: 600px) {
   .blog-preview {
     flex-direction: column;
     gap: 10px;
   }
 
-  .blog-preview .blog-img {
+  .blog-preview .blog-img, .blog-details .blog-img {
     max-width: 100%
   }
+
 }
+
 
 /* Login and Register Page */
 .login-page, .register-page {

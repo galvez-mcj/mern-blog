@@ -114,6 +114,14 @@ app.get('/posts', async (req, res) => {
     res.json(posts)
 })
 
+// get a single blog post
+app.get('/post/:id', async (req, res) => {
+    const { id } = req.params
+    const post = await Post.findById(id)
+                    .populate('author', ['username'])
+    res.json(post)
+})
+
 
 // connect to db
 mongoose.connect(process.env.DB_URI)
