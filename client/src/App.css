@@ -133,6 +133,33 @@ a {
   line-height: 1.5rem;
 }
 
+.blog-details .edit-blog {
+  margin: 0 auto;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.blog-details .edit-blog a {
+  background-color: var(--text-dim);
+  border-radius: 5px;
+  padding: 2px 7px;
+  color: var(--text-light);
+}
+
+.blog-details .edit-blog a:hover {
+  background-color: var(--secondary);
+}
+
+.blog-details .edit-blog a:hover {
+  color: var(--text-color);
+}
+
+.blog-details .edit-blog .edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
 /* Login and Register Page */
 .login-page, .register-page {
   max-width: 300px;
