@@ -105,6 +105,42 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     })
 })
 
+// edit a blog post 
+app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
+    let newPath = null
+
+    // checks if there is a new file added
+    if (req.file) {
+        const { originalname, path } = req.file
+        const parts = originalname.split('.')
+        const ext = parts[parts.length - 1]
+        newPath = path + '.' + ext
+        fs.renameSync(path, newPath)
+    }
+
+    const { token } = req.cookies
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+
+        const { id, title, summary, content } = req.body
+        const post = await Post.findById(id)
+        const isAuthor = JSON.stringify(post.author) === JSON.stringify(info.id)
+
+        if (!isAuthor) {
+            return res.status(400).json('you are not the author of this post');
+        }
+        
+        await post.update({
+            title,
+            summary,
+            content,
+            cover: newPath ? newPath : post.cover
+        })
+
+        res.json(post)
+    }) 
+})
+
 // get all blog posts
 app.get('/posts', async (req, res) => {
     const posts = await Post.find()
