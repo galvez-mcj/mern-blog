@@ -5,6 +5,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const bcrpyt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
 const User = require('./models/User')
 
@@ -14,6 +15,7 @@ app.use(cors({ credentials: true,
                 origin: 'http://localhost:3000'
             }))
 app.use(express.json())
+app.use(cookieParser())
 
 // for password hiding
 const salt = bcrpyt.genSaltSync(16)
@@ -42,15 +44,33 @@ app.post('/login', async (req, res) => {
     
     if (passOk) {
         // logged in
-        jwt.sign({ username, id:user._id }, secret, {}, (err, token) => {
+        jwt.sign({ username, id: user._id }, secret, {}, (err, token) => {
             if (err) throw err;
-            res.cookie('token', token).json('ok')
+            res.cookie('token', token).json({
+                id: user._id,
+                username
+            })
         })
     } else {
         res.status(400).json('wrong credentials')
     }
     
 })
+
+// successful login will redirect to profile
+app.get('/profile', (req, res) => {
+    const { token } = req.cookies
+    jwt.verify(token, secret, {}, (err, info) => {
+        if (err) throw err;
+        res.json(info)
+    })
+})
+
+// logout
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json('ok')
+})
+
 
 // connect to db
 mongoose.connect(process.env.DB_URI)

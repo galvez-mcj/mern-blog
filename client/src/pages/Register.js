@@ -1,11 +1,12 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 
 const Register = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confPassword, setConfPassword] = useState('')
   const [error, setError] = useState(null)
+  const [redirect, setRedirect] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -20,9 +21,14 @@ const Register = () => {
 
     if (response.status === 200) {
       alert('Registration Successful!')
+      setRedirect(true)
     } else {
       alert('Registration Failed.')
     }
+  }
+
+  if (redirect) {
+    return <Navigate to={'/login'} />
   }
 
   return (
