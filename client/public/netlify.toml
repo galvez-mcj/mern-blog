@@ -1,6 +1,6 @@
 [[redirects]]
-  from = 'http://localhost:5000/posts'
-  to = 'http://localhost:3000'
+  from = 'http://localhost:3000'
+  to = 'http://localhost:5000/posts'
   status = 200
   force = true
   headers = {X-From = "Netlify"}
