@@ -9,7 +9,13 @@ const BlogDetails = () => {
     const { id } = useParams()
 
     useEffect( () => {
-        fetch(`http://localhost:5000/post/${id}`)
+        fetch(`http://localhost:5000/post/${id}`, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTION",
+                "Content-Type": "application/json"
+             }
+        })
             .then( response => {
                 response.json().then( postInfo => {
                     setPostInfo(postInfo)

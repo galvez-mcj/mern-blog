@@ -11,7 +11,13 @@ const Edit = () => {
     const [redirect, setRedirect] = useState(false)
     
     useEffect( () => {
-        fetch(`http://localhost:5000/post/${id}`)
+        fetch(`http://localhost:5000/post/${id}`, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTION",
+                "Content-Type": "application/json"
+             }
+        })
             .then( response => {
                 response.json().then( postInfo => {
                     setTitle(postInfo.title)
@@ -34,6 +40,11 @@ const Edit = () => {
         }
 
         const response = await fetch('http://localhost:5000/post/', {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTION",
+                "Content-Type": "application/json"
+            },
             method: 'PUT',
             body: data,
             credentials: 'include'
