@@ -5,13 +5,7 @@ const Home = () => {
   const [posts, setPosts] = useState([])
 
   useEffect( () => {
-    fetch('http://localhost:5000/posts', {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTION",
-        "Content-Type": "application/json"
-      }
-    })
+    fetch('http://localhost:5000/posts')
       .then(response => {
         response.json()
           .then(posts => {

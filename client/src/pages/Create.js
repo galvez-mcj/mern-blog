@@ -19,11 +19,6 @@ const Create = () => {
         e.preventDefault()
 
         const response = await fetch('http://localhost:5000/post', {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, OPTION",
-                "Content-Type": "application/json"
-            },
             method: 'POST',
             body: data,
             credentials: 'include'
