@@ -15,8 +15,8 @@ const Post = require('./models/Post')
 const fs = require('fs')
 const multer = require('multer')
 
-/* // for local dev only
-/* const uploadMiddleware = multer({ dest: 'uploads/' }) */
+// for local dev only
+const uploadMiddleware = multer({ dest: 'uploads/' })
 
 const app = express()
 
