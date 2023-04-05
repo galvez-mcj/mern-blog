@@ -1,0 +1,10 @@
+[[redirects]]
+  from = 'http://localhost:5000/posts'
+  to = 'http://localhost:3000'
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
