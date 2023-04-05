@@ -20,7 +20,7 @@ const Create = () => {
 
         const response = await fetch('http://localhost:5000/post', {
             headers: {
-                "Access-Control-Allow-Origin": "http://localhost:3000",
+                "Access-Control-Allow-Origin": "https://thebloggers.netlify.app/",
                 "Access-Control-Allow-Methods": "GET, POST, OPTION",
                 "Content-Type": "application/json"
             },
