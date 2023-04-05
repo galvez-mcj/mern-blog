@@ -5,7 +5,7 @@ const Home = () => {
   const [posts, setPosts] = useState([])
 
   useEffect( () => {
-    fetch('http://localhost:5000/posts', {
+    fetch('https://mern-backend-gk2t.onrender.com/posts', {
       headers: {
         "Access-Control-Allow-Origin": "https://thebloggers.netlify.app/",
         "Access-Control-Allow-Methods": "GET, POST, OPTION",

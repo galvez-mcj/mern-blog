@@ -9,7 +9,7 @@ const BlogDetails = () => {
     const { id } = useParams()
 
     useEffect( () => {
-        fetch(`http://localhost:5000/post/${id}`, {
+        fetch(`https://mern-backend-gk2t.onrender.com/${id}`, {
             headers: {
                 "Access-Control-Allow-Origin": "https://thebloggers.netlify.app/",
                 "Access-Control-Allow-Methods": "GET, POST, OPTION",

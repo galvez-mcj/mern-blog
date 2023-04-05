@@ -11,9 +11,9 @@ const Edit = () => {
     const [redirect, setRedirect] = useState(false)
     
     useEffect( () => {
-        fetch(`http://localhost:5000/post/${id}`, {
+        fetch(`https://mern-backend-gk2t.onrender.com/post/${id}`, {
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": "https://thebloggers.netlify.app/",
                 "Access-Control-Allow-Methods": "GET, POST, OPTION",
                 "Content-Type": "application/json"
              }
@@ -39,7 +39,7 @@ const Edit = () => {
             data.set('file', files?.[0])
         }
 
-        const response = await fetch('http://localhost:5000/post/', {
+        const response = await fetch('https://mern-backend-gk2t.onrender.com/post/', {
             headers: {
                 "Access-Control-Allow-Origin": "https://thebloggers.netlify.app/",
                 "Access-Control-Allow-Methods": "GET, POST, OPTION",

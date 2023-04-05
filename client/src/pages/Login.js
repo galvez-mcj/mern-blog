@@ -13,7 +13,7 @@ const Login = () => {
 
     const user = { username, password }
 
-    const response = await fetch('http://localhost:5000/login', {
+    const response = await fetch('https://mern-backend-gk2t.onrender.com/login', {
       method: 'POST',
       headers: {
         "Access-Control-Allow-Origin": "https://thebloggers.netlify.app/",
