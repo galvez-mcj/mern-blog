@@ -1,6 +1,6 @@
 [[redirects]]
-  from = 'https://thebloggers.netlify.app/'
-  to = 'https://mern-backend-gk2t.onrender.com/posts'
+  from = 'https://localhost:5000'
+  to = 'https://mern-backend-gk2t.onrender.com'
   status = 200
   force = true
   headers = {X-From = "Netlify"}
